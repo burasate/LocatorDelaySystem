@@ -3,14 +3,14 @@ import datetime as dt
 import maya.cmds as cmd
 #Time
 date = dt.datetime.today()
-value1 = urllib.quote_plus(str(date))
+value1 = str(date)
 #User Info
 user = str(getpass.getuser()).upper()
 ma_ver = 'MAYA'#+str(cmd.about(version=True))
 ip_host = str(socket.gethostbyname('www.google.com'))
 value2_list = [user,ma_ver,ip_host]
-value2 = urllib.quote_plus(','.join(value2_list))
+value2 = ','.join(value2_list)
 #Action
-value3 = urllib.quote_plus('V1.09')
+value3 ='V1.09'
 url = 'https://maker.ifttt.com/trigger/brs_locDlay/with/key/lt6C8G5VRbvc2fOnGjmS5_4J9A_fwtNjQ2VQJ6fO5YK?value1='+value1+'&value2='+value2+'&value3='+value3
 urllib2.urlopen(hook, timeout=60).read()
