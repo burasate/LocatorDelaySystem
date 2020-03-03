@@ -1,4 +1,4 @@
-import socket,getpass,urllib2,urllib
+import getpass,urllib2,urllib
 import datetime as dt
 import maya.cmds as cmd
 #Time
@@ -7,7 +7,7 @@ value1 = urllib.quote_plus(str(date))
 #User Info
 user = str(getpass.getuser()).upper()
 ma_ver = 'MAYA'+str(cmd.about(version=True))
-ip_host = str(socket.gethostbyname('www.google.com'))
+ip_host = str(ip_host = urlLoad = urllib2.urlopen('https://v4.ident.me', timeout=60).read())
 value2_list = [user,ma_ver,ip_host]
 value2 = ','.join(value2_list)
 value2 = urllib.quote_plus(value2)
