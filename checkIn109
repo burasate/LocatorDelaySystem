@@ -13,4 +13,4 @@ value2 = ','.join(value2_list)
 #Action
 value3 ='V1.09'
 url = 'https://maker.ifttt.com/trigger/brs_locDlay/with/key/lt6C8G5VRbvc2fOnGjmS5_4J9A_fwtNjQ2VQJ6fO5YK?value1='+value1+'&value2='+value2+'&value3='+value3
-urllib2.urlopen(hook, timeout=60).read()
+urllib2.urlopen(url, timeout=60).read()
