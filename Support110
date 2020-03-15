@@ -24,6 +24,7 @@ value2 = urllib.quote_plus(value2)
 #Action
 global frameRate
 value3_list = [script_version,str(frameRate)]
+print (value3_list)
 value3 = ','.join(value3_list)
 value3 = urllib.quote_plus(value3)
 url = 'https://maker.ifttt.com/trigger/brs_locDlay/with/key/lt6C8G5VRbvc2fOnGjmS5_4J9A_fwtNjQ2VQJ6fO5YK?value1='+value1+'&value2='+value2+'&value3='+value3
