@@ -1,3 +1,12 @@
+"""
+---------------------
+LocatorDelaySystem
+Support Service V1.10
+---------------------
+LOG
+- added checking in
+"""
+
 #Check Info
 import getpass,urllib2,urllib
 import datetime as dt
