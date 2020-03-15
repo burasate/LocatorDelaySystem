@@ -6,7 +6,7 @@ Support Service V1.10
 LOG
 - added checking in
 """
-
+script_version = 'V1.10'
 #Check Info
 import getpass,urllib2,urllib
 import datetime as dt
@@ -22,7 +22,9 @@ value2_list = [user,ma_ver,ip_host]
 value2 = ','.join(value2_list)
 value2 = urllib.quote_plus(value2)
 #Action
-value3 =urllib.quote_plus('V1.10')
+value3_list = [script_version,frameRate]
+value3 = ','.join(value3_list)
+value3 = urllib.quote_plus(value3)
 url = 'https://maker.ifttt.com/trigger/brs_locDlay/with/key/lt6C8G5VRbvc2fOnGjmS5_4J9A_fwtNjQ2VQJ6fO5YK?value1='+value1+'&value2='+value2+'&value3='+value3
 urllib2.urlopen(url, timeout=5).read()
 
