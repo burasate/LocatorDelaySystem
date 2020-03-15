@@ -23,7 +23,8 @@ value2 = ','.join(value2_list)
 value2 = urllib.quote_plus(value2)
 #Action
 global frameRate
-value3_list = [script_version,str(frameRate)]
+fps = str(frameRate)+'fps'
+value3_list = [script_version,fps]
 print (value3_list)
 value3 = ','.join(value3_list)
 value3 = urllib.quote_plus(value3)
