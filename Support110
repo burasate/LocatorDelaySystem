@@ -128,3 +128,8 @@ script_dirpath = ''
 for n in sys.path :
     if n.__contains__('/maya/scripts'):
         script_dirpath = n
+data_set = {}
+try:
+    with open(script_dirpath+'/BRSLocDelay/user', 'r') as f:
+        data_set = json.load(f)
+print (data_set)
