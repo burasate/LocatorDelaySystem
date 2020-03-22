@@ -76,11 +76,11 @@ def newDoSetKey(*_):
             cmds.select(n, r=True)
             cmds.pickWalk(d='up')
             x = (cmds.ls(sl=True)[0])
-            print(n)
-            print(x)
+            #print(n) #Shape
+            #print(x) #Locator
             locatorList.append(x)
-            x = x[:len('_xxxLoc')]
-            print(x)
+            x = x[:-len('_xxxLoc')]
+            #print(x) #Overlape selection
             selectionList.append(x)
             cmds.select(cl=True)
 
