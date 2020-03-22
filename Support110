@@ -133,3 +133,4 @@ try:
     with open(script_dirpath+'/BRSLocDelay/user', 'r') as f:
         data_set = json.load(f)
 print (data_set)
+except:pass
