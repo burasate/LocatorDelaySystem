@@ -120,3 +120,10 @@ def newDoSetKey(*_):
     
 #upadate bake script
 cmds.button(setKeyB, e=True, c=newDoSetKey)
+
+#--------------
+# version
+#--------------
+dirpath = os.path.dirname(os.path.abspath(__file__))
+new_dirpath = str(dirpath).replace('\\','/')+'/'
+print (new_dirpath)
