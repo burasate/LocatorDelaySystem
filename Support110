@@ -10,16 +10,32 @@ import json,getpass,urllib2,urllib,os,sys
 import datetime as dt
 import maya.cmds as cmds
 
+#--------------
+# user
+#--------------
+
+
 script_version = 'V1.10'
 #Check Info
 #Time
 date = dt.datetime.today()
 value1 = urllib.quote_plus(str(date))
 #User Info
+script_dirpath = ''
+for n in sys.path :
+    if n.__contains__('/maya/scripts'):
+        script_dirpath = n
+data_set = {}
+try:
+    with open(script_dirpath+'/BRSLocDelay/user', 'r') as f:
+        data_set = json.load(f)
+except:
+    data_set['email'] = ''
+    pass
 user = str(getpass.getuser()).upper()
 ma_ver = 'MAYA'+str(cmds.about(version=True))
 ip_host = str(urllib2.urlopen('https://v4.ident.me', timeout=5).read().decode('utf8'))
-value2_list = [user,ma_ver,ip_host]
+value2_list = [data_set['email'],user,ma_ver,ip_host]
 value2 = ','.join(value2_list)
 value2 = urllib.quote_plus(value2)
 #Action
@@ -120,17 +136,3 @@ def newDoSetKey(*_):
     
 #upadate bake script
 cmds.button(setKeyB, e=True, c=newDoSetKey)
-
-#--------------
-# version
-#--------------
-script_dirpath = ''
-for n in sys.path :
-    if n.__contains__('/maya/scripts'):
-        script_dirpath = n
-data_set = {}
-try:
-    with open(script_dirpath+'/BRSLocDelay/user', 'r') as f:
-        data_set = json.load(f)
-except:pass
-print (data_set)
