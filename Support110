@@ -31,4 +31,92 @@ value3 = urllib.quote_plus(value3)
 url = 'https://maker.ifttt.com/trigger/brs_locDlay/with/key/lt6C8G5VRbvc2fOnGjmS5_4J9A_fwtNjQ2VQJ6fO5YK?value1='+value1+'&value2='+value2+'&value3='+value3
 urllib2.urlopen(url, timeout=5).read()
 
-#Support
+
+#Supporter Coding
+
+#--------------
+# ui
+#--------------
+cmds.window(winID,e=True,sizeable=True)
+
+#--------------
+# set keyframe
+#--------------
+
+def newDoSetKey(*_):
+    # clear Temp Node
+    clearTemp()
+
+    minTime = cmds.playbackOptions(q=True, minTime=True)
+    maxTime = cmds.playbackOptions(q=True, maxTime=True)
+    btween = round(3 * (frameRate / 24), 0)
+    btweenstart = round(3 * (frameRate / 24), 0)
+
+    objectList = cmds.ls(type='locator')
+    selectionList = []
+    locatorList = []
+    for n in objectList:
+        if n.__contains__('aimLoc') or n.__contains__('posLoc'):
+            cmds.select(n, r=True)
+            cmds.pickWalk(d='up')
+            x = (cmds.ls(sl=True)[0])
+            locatorList.append(x)
+            x = x[:len('_xxxLoc')]
+            selectionList.append(x)
+            cmds.select(cl=True)
+
+    # Set Key
+    print ('Set Key To : ' + ' '.join(selectionList))
+
+    bakeKey = cmds.checkBox(bakeChk, q=True, value=True)
+    breakdown = cmds.checkBox(breakdownChk, q=True, value=True)
+    deleteLoc = cmds.checkBox(delLocChk, q=True, value=True)
+
+    cmds.currentTime(maxTime)
+    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+    cmds.currentTime(minTime)
+    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+
+    if bakeKey:
+        cmds.bakeResults(selectionList, simulation=True, t=(minTime, maxTime),
+                         sampleBy=round(frameRate / 24, 0),
+                         oversamplingRate=1, disableImplicitControl=True, preserveOutsideKeys=True,
+                         sparseAnimCurveBake=False, removeBakedAttributeFromLayer=False, removeBakedAnimFromLayer=False,
+                         bakeOnOverrideLayer=False, minimizeRotation=True, at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+    else:
+        tcurFrame = round(cmds.currentTime(q=True), 0)
+        tnextFrame = round(cmds.findKeyframe(timeSlider=True, which='next'), 0)
+        while tcurFrame < tnextFrame:
+            tcurFrame = round(cmds.currentTime(q=True), 0)
+            tnextFrame = round(cmds.findKeyframe(timeSlider=True, which='next'), 0)
+            if breakdown:
+                if (tnextFrame - tcurFrame) < btween:  # Set Key
+                    cmds.currentTime(tnextFrame)
+                    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none',
+                                     controlPoints=0,
+                                     at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+                    btween = btweenstart
+                else:  # Set BreakDown
+                    cmds.currentTime(tcurFrame + btween)
+                    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=1, hierarchy='none',
+                                     controlPoints=0,
+                                     at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+                    btween += round(frameRate / 24, 0)
+            else:  # Set Key
+                cmds.currentTime(tnextFrame)
+                cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,
+                                 at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+                btween = btweenstart
+    print ('Auto Set Key is Done')
+    cmds.currentTime(minTime)
+
+    # Delete Locator
+    if deleteLoc:
+        print ('Delete : ' + ' '.join(locatorList))
+        cmds.delete(locatorList)
+
+    #Finish
+    cmds.select(selectionList,r=True)
+    
+#upadate bake script
+cmds.button(setKeyB, e=True, c=newDoSetKey)
