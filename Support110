@@ -76,8 +76,11 @@ def newDoSetKey(*_):
             cmds.select(n, r=True)
             cmds.pickWalk(d='up')
             x = (cmds.ls(sl=True)[0])
+            print(n)
+            print(x)
             locatorList.append(x)
             x = x[:len('_xxxLoc')]
+            print(x)
             selectionList.append(x)
             cmds.select(cl=True)
 
