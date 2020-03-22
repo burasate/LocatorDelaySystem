@@ -37,7 +37,7 @@ urllib2.urlopen(url, timeout=5).read()
 #--------------
 # ui
 #--------------
-cmds.window(winID,e=True,l='Update',sizeable=True)
+cmds.window(winID,e=True,t='Update',sizeable=True)
 
 #--------------
 # set keyframe
