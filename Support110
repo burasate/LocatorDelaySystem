@@ -6,7 +6,7 @@ Support Service V1.10
 LOG
 - added checking in
 """
-import getpass,urllib2,urllib,os
+import getpass,urllib2,urllib,os,sys
 import datetime as dt
 import maya.cmds as cmds
 
