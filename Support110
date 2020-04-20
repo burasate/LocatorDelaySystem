@@ -53,7 +53,7 @@ urllib2.urlopen(url, timeout=5).read()
 #--------------
 # ui
 #--------------
-cmds.window(winID,e=True,sizeable=True,mbv=True)
+cmds.window(winID,e=True,sizeable=True,tlc=True)
 
 #--------------
 # set keyframe
