@@ -15,7 +15,7 @@ import maya.cmds as cmds
 #--------------
 
 
-script_version = 'V1.10'
+script_version = 'V1.11'
 #Check Info
 #Time
 date = dt.datetime.today()
