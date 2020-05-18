@@ -3,7 +3,7 @@ LOCATOR DELAY SYSTEM SHELF INSTALLER
 """
 from maya import cmds
 from maya import mel
-import os, json, sys
+import os, json
 import datetime as dt
 
 
@@ -47,11 +47,11 @@ except:
             cancelButton='Cancel',
             dismissString='Cancel', bgc=(.2, .2, .2))
         if user == 'Confirm':
-            data_set['email'] = cmds.promptDialog(query=True, text=True)
+            dataSet['email'] = cmds.promptDialog(query=True, text=True)
         else:
-            data_set['email'] = ''
+            dataSet['email'] = ''
 
-        if not data_set['email'].__contains__('@') or not data_set['email'].__contains__('.'):
+        if not dataSet['email'].__contains__('@') or not dataSet['email'].__contains__('.'):
             pass
         else:
             break
@@ -65,7 +65,7 @@ except:
 
     # Create User
     with open(userFile, 'w') as f:
-        json.dump(data_set, f, indent=4)
+        json.dump(dataSet, f, indent=4)
 
 # Create Shelf
 topShelf = mel.eval('$nul = $gShelfTopLevel')
