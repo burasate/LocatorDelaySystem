@@ -30,7 +30,7 @@ try:
     with open(script_dirpath+'/BRSLocDelay/user', 'r') as f:
         data_set = json.load(f)
 except:
-    data_set['email'] = ''
+    data_set['email'] = 'email not found  '+ script_dirpath
     pass
 user = str(getpass.getuser()).upper()
 ma_ver = 'MAYA'+str(cmds.about(version=True))
