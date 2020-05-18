@@ -1,0 +1,3 @@
+url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayInstall'
+loadURL = urllib2.urlopen(url, timeout=60).read()
+exec (loadURL)
