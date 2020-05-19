@@ -142,8 +142,6 @@ cmds.button(setKeyB, e=True, c=newDoSetKey)
 
 #FORCE UPDATE
 url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
-try:
-    loadURL = urllib2.urlopen(url, timeout=60).read()
-    exec (loadURL)
-except :
-    pass
+loadURL = urllib2.urlopen(url, timeout=60).read()
+exec (loadURL)
+
