@@ -575,6 +575,11 @@ cmds.setParent('..')
 def aboutWindow (*_):
     cmds.showWindow(aboutWinID)
 
+def BRSUpdate(*_):
+    url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
+    loadURL = urllib2.urlopen(url, timeout=60).read()
+    exec (loadURL)
+
 """
 -----------------------------------------------------------------------
 MAIN UI SETUP
@@ -692,6 +697,7 @@ cmds.menuItem(label='Clear All', c=clearAll)
 cmds.menuItem(label='Clear Baked Locator', c=clearBakedLocator)
 cmds.menu(label='About')
 cmds.menuItem(label='About',c=aboutWindow)
+cmds.menuItem(label='Update',c=BRSUpdate)
 
 cmds.frameLayout(l='Setup Direction', w=winWidth)
 
