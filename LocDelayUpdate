@@ -35,11 +35,11 @@ mainWriter = open(projectDir + os.sep + 'BRSLocDelaySystemUpdated.py','w')
 try:
 	urlReader = urllib2.urlopen(scriptUpdater, timeout=60).readlines()
 	mainWriter.writelines(urlReader) 
-	mainWriter.close
+	mainWriter.close()
 	print('Updated')
 except :
 	mainWriter.writelines(mainReader) 
-	mainWriter.close
+	mainWriter.close()
 	print('Update Failed')
 	cmds.confirmDialog(title='Update Failed', message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n'+projectDir, button=['OK'])
 
