@@ -3,7 +3,7 @@ LOCATOR DELAY SYSTEM UPDATER
 """
 from maya import cmds
 from maya import mel
-import os, json
+import os,json,urllib2
 import datetime as dt
 
 
@@ -43,6 +43,7 @@ else:
 		mainWriter.writelines(urlReader) 
 		mainWriter.close()
 		print('Updated')
+		cmds.confirmDialog(title='BRS LOCATOR DELAY UPDATE', message='Update Successful', button=['OK'])
 	except :
 		mainWriter.writelines(mainReader) 
 		mainWriter.close()
