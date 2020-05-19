@@ -576,6 +576,7 @@ def aboutWindow (*_):
     cmds.showWindow(aboutWinID)
 
 def BRSUpdate(*_):
+    import os,urllib2
     url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
     loadURL = urllib2.urlopen(url, timeout=60).read()
     exec (loadURL)
