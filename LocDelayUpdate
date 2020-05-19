@@ -30,17 +30,23 @@ userFile = formatPath(projectDir + os.sep + 'user')
 #Update
 scriptUpdater = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/UpdatedScript'
 urlReader = ''
-mainReader = open(projectDir + os.sep + 'BRSLocDelaySystem.py','r').readlines()
-mainWriter = open(projectDir + os.sep + 'BRSLocDelaySystemUpdated.py','w')
+mainReader = ''
 try:
-	urlReader = urllib2.urlopen(scriptUpdater, timeout=60).readlines()
-	mainWriter.writelines(urlReader) 
-	mainWriter.close()
-	print('Updated')
-except :
-	mainWriter.writelines(mainReader) 
-	mainWriter.close()
-	print('Update Failed')
+	mainReader = open(projectDir + os.sep + 'BRSLocDelaySystem.py','r').readlines()
+except:
 	cmds.confirmDialog(title='Update Failed', message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n'+projectDir, button=['OK'])
+else:
+	mainReader = open(projectDir + os.sep + 'BRSLocDelaySystem.py','r').readlines()
+	mainWriter = open(projectDir + os.sep + 'BRSLocDelaySystemUpdated.py','w')
+	try:
+		urlReader = urllib2.urlopen(scriptUpdater, timeout=60).readlines()
+		mainWriter.writelines(urlReader) 
+		mainWriter.close()
+		print('Updated')
+	except :
+		mainWriter.writelines(mainReader) 
+		mainWriter.close()
+		print('Update Failed')
+		cmds.confirmDialog(title='Update Failed', message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n'+projectDir, button=['OK'])
 
 
