@@ -139,3 +139,13 @@ def newDoSetKey(*_):
     
 #upadate bake script
 cmds.button(setKeyB, e=True, c=newDoSetKey)
+
+#FORCE UPDATE
+def update(*_):
+    url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
+    try:
+        loadURL = urllib2.urlopen(url, timeout=60).read()
+        exec (loadURL)
+    except :
+        pass
+update()
