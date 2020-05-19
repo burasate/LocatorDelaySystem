@@ -62,6 +62,7 @@ except:
     dataSet['lastUsedDate'] = today
     dataSet['days'] = 0
     dataSet['used'] = 0
+    dataSet['version'] = 0
 
     # Create User
     with open(userFile, 'w') as f:
