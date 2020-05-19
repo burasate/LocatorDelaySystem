@@ -18,10 +18,10 @@ scriptsDir = formatPath(mayaAppDir + os.sep + 'scripts')
 projectDir = formatPath(scriptsDir + os.sep + 'BRSLocDelay')
 userFile = formatPath(projectDir + os.sep + 'user')
 
-print ('mayaAppDir = ' + mayaAppDir)
-print ('scriptsDir = ' + scriptsDir)
-print ('projectDir = ' + projectDir)
-print ('userSetupFile = ' + userFile)
+#print ('mayaAppDir = ' + mayaAppDir)
+#print ('scriptsDir = ' + scriptsDir)
+#print ('projectDir = ' + projectDir)
+#print ('userSetupFile = ' + userFile)
 # mayaAppDir = C:\Users\TEST\Documents\maya
 # scriptsDir = C:\Users\TEST\Documents\maya\scripts
 # projectDir = C:\Users\TEST\Documents\maya\scripts\BRSLocDelay
