@@ -34,7 +34,7 @@ mainReader = ''
 try:
 	mainReader = open(projectDir + os.sep + 'BRSLocDelaySystem.py','r').readlines()
 except:
-	cmds.confirmDialog(title='Update Failed', message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n'+projectDir, button=['OK'])
+	cmds.confirmDialog(title='Update Failed', message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n'+projectDir+os.sep, button=['OK'])
 else:
 	mainReader = open(projectDir + os.sep + 'BRSLocDelaySystem.py','r').readlines()
 	mainWriter = open(projectDir + os.sep + 'BRSLocDelaySystemUpdated.py','w')
@@ -47,6 +47,6 @@ else:
 		mainWriter.writelines(mainReader) 
 		mainWriter.close()
 		print('Update Failed')
-		cmds.confirmDialog(title='Update Failed', message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n'+projectDir, button=['OK'])
+		cmds.confirmDialog(title='Update Failed', message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n'+projectDir+os.sep, button=['OK'])
 
 
