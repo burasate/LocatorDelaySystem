@@ -48,3 +48,6 @@ urllib2.urlopen(url, timeout=5).read()
 
 
 #Supporter Coding
+
+# Redraw viewport On
+cmds.refresh(suspend=False)
