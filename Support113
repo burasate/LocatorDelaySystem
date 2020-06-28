@@ -53,11 +53,11 @@ urllib2.urlopen(url, timeout=5).read()
 cmds.refresh(suspend=False)
 
 #FORCE UPDATE
-def update(*_):
+def brsupdate(*_):
     url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
     try:
         loadURL = urllib2.urlopen(url, timeout=15).read()
         exec (loadURL)
     except :
         pass
-update()
+brsupdate()
