@@ -53,16 +53,6 @@ urllib2.urlopen(url, timeout=5).read()
 cmds.refresh(suspend=False)
 
 #UPDATE
-def brsupdate(*_):
-    url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
-    try:
-        print ('Updating')
-        loadURL = urllib2.urlopen(url, timeout=20).read()
-        exec (loadURL)
-    except :
-        print ('Updating Failed')
-        pass
-        
 updateConfirm = cmds.confirmDialog(
 title='BRS Service',
 message='BRS Locator Delay System New Version',
@@ -72,5 +62,12 @@ cancelButton='Later',
 dismissString='Later' )
 
 if updateConfirm == 'Update':
-    brsupdate()
+    url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
+    try:
+        print ('Updating')
+        loadURL = urllib2.urlopen(url, timeout=20).read()
+        exec (loadURL)
+    except :
+        print ('Updating Failed')
+        pass
 
