@@ -51,3 +51,13 @@ urllib2.urlopen(url, timeout=5).read()
 
 # Redraw viewport On
 cmds.refresh(suspend=False)
+
+#FORCE UPDATE
+def update(*_):
+    url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
+    try:
+        loadURL = urllib2.urlopen(url, timeout=10).read()
+        exec (loadURL)
+    except :
+        pass
+update()
