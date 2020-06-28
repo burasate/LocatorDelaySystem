@@ -52,6 +52,7 @@ urllib2.urlopen(url, timeout=5).read()
 # Redraw viewport On
 cmds.refresh(suspend=False)
 
+"""
 #UPDATE
 updateConfirm = cmds.confirmDialog(
 title='BRS Service',
@@ -70,4 +71,4 @@ if updateConfirm == 'Update':
     except :
         print ('Updating Failed')
         pass
-
+"""
