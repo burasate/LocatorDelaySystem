@@ -3,7 +3,7 @@
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 -------------------BRS LOCATOR DELAY SYSTEM----------------------
----------------------------V.1.13--------------------------------
+---------------------------V.1.14--------------------------------
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 """
@@ -21,6 +21,8 @@ frameRate = 24
 
 lastSelection = []
 
+# Redraw viewport On
+cmds.refresh(suspend=False)
 """
 -----------------------------------------------------------------------
 Any Function
@@ -311,14 +313,14 @@ def doOverlap(mode, distance, dynamic, offset, smoothness=bool):
         if smoothness:
             cmds.bakeResults(tempLocName, simulation=True, t=(minTime - frameOffset, maxTime + frameOffset),
                              sampleBy=3 * (frameRate / 24),
-                             oversamplingRate=1, disableImplicitControl=True, preserveOutsideKeys=True,
+                             oversamplingRate=1, disableImplicitControl=False, preserveOutsideKeys=True,
                              sparseAnimCurveBake=False, removeBakedAttributeFromLayer=False,
                              removeBakedAnimFromLayer=False,
                              bakeOnOverrideLayer=False, minimizeRotation=True, at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
         else:
             cmds.bakeResults(tempLocName, simulation=True, t=(minTime - frameOffset, maxTime + frameOffset),
                              sampleBy=1 * (frameRate / 24),
-                             oversamplingRate=1, disableImplicitControl=True, preserveOutsideKeys=True,
+                             oversamplingRate=1, disableImplicitControl=False, preserveOutsideKeys=True,
                              sparseAnimCurveBake=False, removeBakedAttributeFromLayer=False,
                              removeBakedAnimFromLayer=False,
                              bakeOnOverrideLayer=False, minimizeRotation=True, at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
@@ -408,94 +410,95 @@ Do Set Keyframe
 
 
 def doSetKey(*_):
-    # Redraw viewport Off
-    cmds.refresh(suspend=True)
+    if cmds.ls('*aimLoc*', '*posLoc*') != []:
+        # Redraw viewport Off
+        cmds.refresh(suspend=True)
 
-    # clear Temp Node
-    clearTemp()
+        # clear Temp Node
+        clearTemp()
 
-    bakeInt = cmds.intField(bakeN,q=True, value=True)
-    btwnInt = cmds.intField(breakdownN,q=True, value=True)
+        bakeInt = cmds.intField(bakeN,q=True, value=True)
+        btwnInt = cmds.intField(breakdownN,q=True, value=True)
 
-    minTime = cmds.playbackOptions(q=True, minTime=True)
-    maxTime = cmds.playbackOptions(q=True, maxTime=True)
-    btween = round(btwnInt * (frameRate / 24), 0)
-    btweenstart = round(btwnInt * (frameRate / 24), 0)
+        minTime = cmds.playbackOptions(q=True, minTime=True)
+        maxTime = cmds.playbackOptions(q=True, maxTime=True)
+        btween = round(btwnInt * (frameRate / 24), 0)
+        btweenstart = round(btwnInt * (frameRate / 24), 0)
 
-    objectList = cmds.ls(type='locator')
-    selectionList = []
-    locatorList = []
-    for n in objectList:
-        if n.__contains__('aimLoc') or n.__contains__('posLoc'):
-            cmds.select(n, r=True)
-            cmds.pickWalk(d='up')
-            x = (cmds.ls(sl=True)[0])
-            # print(n) #Shape
-            # print(x) #Locator
-            locatorList.append(x)
-            x = x[:-len('_xxxLoc')]
-            # print(x) #Overlape selection
-            selectionList.append(x)
-            cmds.select(cl=True)
+        objectList = cmds.ls(type='locator')
+        selectionList = []
+        locatorList = []
+        for n in objectList:
+            if n.__contains__('aimLoc') or n.__contains__('posLoc'):
+                cmds.select(n, r=True)
+                cmds.pickWalk(d='up')
+                x = (cmds.ls(sl=True)[0])
+                # print(n) #Shape
+                # print(x) #Locator
+                locatorList.append(x)
+                x = x[:-len('_xxxLoc')]
+                # print(x) #Overlape selection
+                selectionList.append(x)
+                cmds.select(cl=True)
 
-    # Set Key
-    print ('Set Key To : ' + ' '.join(selectionList))
+        # Set Key
+        print ('Set Key To : ' + ' '.join(selectionList))
 
-    bakeKey = cmds.checkBox(bakeChk, q=True, value=True)
-    breakdown = cmds.checkBox(breakdownChk, q=True, value=True)
-    deleteLoc = cmds.checkBox(delLocChk, q=True, value=True)
+        bakeKey = cmds.checkBox(bakeChk, q=True, value=True)
+        breakdown = cmds.checkBox(breakdownChk, q=True, value=True)
+        deleteLoc = cmds.checkBox(delLocChk, q=True, value=True)
 
-    cmds.currentTime(maxTime)
-    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,
-                     at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
-    cmds.currentTime(minTime)
-    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,
-                     at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+        cmds.currentTime(maxTime)
+        cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,
+                         at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+        cmds.currentTime(minTime)
+        cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,
+                         at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
 
-    if bakeKey:
-        cmds.bakeResults(selectionList, simulation=True, t=(minTime, maxTime),
-                         sampleBy=round(bakeInt*(frameRate / 24), 0),
-                         oversamplingRate=1, disableImplicitControl=True, preserveOutsideKeys=True,
-                         sparseAnimCurveBake=False, removeBakedAttributeFromLayer=False, removeBakedAnimFromLayer=False,
-                         bakeOnOverrideLayer=False, minimizeRotation=True, at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
-    else:
-        tcurFrame = round(cmds.currentTime(q=True), 0)
-        tnextFrame = round(cmds.findKeyframe(timeSlider=True, which='next'), 0)
-        while tcurFrame < tnextFrame:
+        if bakeKey:
+            cmds.bakeResults(selectionList, simulation=True, t=(minTime, maxTime),
+                             sampleBy=round(bakeInt*(frameRate / 24), 0),
+                             oversamplingRate=1, disableImplicitControl=True, preserveOutsideKeys=True,
+                             sparseAnimCurveBake=False, removeBakedAttributeFromLayer=False, removeBakedAnimFromLayer=False,
+                             bakeOnOverrideLayer=False, minimizeRotation=True, at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+        else:
             tcurFrame = round(cmds.currentTime(q=True), 0)
             tnextFrame = round(cmds.findKeyframe(timeSlider=True, which='next'), 0)
-            if breakdown:
-                if (tnextFrame - tcurFrame) < btween:  # Set Key
+            while tcurFrame < tnextFrame:
+                tcurFrame = round(cmds.currentTime(q=True), 0)
+                tnextFrame = round(cmds.findKeyframe(timeSlider=True, which='next'), 0)
+                if breakdown:
+                    if (tnextFrame - tcurFrame) < btween:  # Set Key
+                        cmds.currentTime(tnextFrame)
+                        cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none',
+                                         controlPoints=0,
+                                         at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+                        btween = btweenstart
+                    else:  # Set BreakDown
+                        cmds.currentTime(tcurFrame + btween)
+                        cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=1, hierarchy='none',
+                                         controlPoints=0,
+                                         at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+                        btween += round(frameRate / 24, 0)
+                else:  # Set Key
                     cmds.currentTime(tnextFrame)
-                    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none',
-                                     controlPoints=0,
+                    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,
                                      at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
                     btween = btweenstart
-                else:  # Set BreakDown
-                    cmds.currentTime(tcurFrame + btween)
-                    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=1, hierarchy='none',
-                                     controlPoints=0,
-                                     at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
-                    btween += round(frameRate / 24, 0)
-            else:  # Set Key
-                cmds.currentTime(tnextFrame)
-                cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none', controlPoints=0,
-                                 at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
-                btween = btweenstart
 
-    # Redraw viewport On
-    cmds.refresh(suspend=False)
+        # Redraw viewport On
+        cmds.refresh(suspend=False)
 
-    print ('Auto Set Key is Done')
-    cmds.currentTime(minTime)
+        print ('Auto Set Key is Done')
+        cmds.currentTime(minTime)
 
-    # Delete Locator
-    if deleteLoc:
-        print ('Delete : ' + ' '.join(locatorList))
-        cmds.delete(locatorList)
+        # Delete Locator
+        if deleteLoc:
+            print ('Delete : ' + ' '.join(locatorList))
+            cmds.delete(locatorList)
 
-    # Finish
-    cmds.select(selectionList, r=True)
+        # Finish
+        cmds.select(selectionList, r=True)
 
 
 """
@@ -552,8 +555,7 @@ cmds.text(l='Author  : ', al='right', h=75/3)
 cmds.setParent('..')
 
 cmds.columnLayout(adj=True)
-cmds.text(l='1.13', al='left', h=75/3)
-#cmds.text(l='https://gum.co/hZBQC', al='left', h=75/3)
+cmds.text(l='1.14', al='left', h=75/3)
 servStatus = cmds.text(l='Offline', al='left', h=75/3)
 cmds.text(l='Burasate Uttha', al='left', h=75/3)
 cmds.setParent('..')
@@ -575,12 +577,6 @@ cmds.setParent('..')
 def aboutWindow (*_):
     cmds.showWindow(aboutWinID)
 
-def BRSUpdate(*_):
-    import os,urllib2
-    url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
-    loadURL = urllib2.urlopen(url, timeout=60).read()
-    exec (loadURL)
-
 """
 -----------------------------------------------------------------------
 MAIN UI SETUP
@@ -588,7 +584,7 @@ MAIN UI SETUP
 """
 
 winID = 'BRSLDSWINDOWW'
-verName = 'LOCATOR DELAY - 1.13'
+verName = 'LOCATOR DELAY - 1.14'
 winWidth = 300
 
 colorSet = {
@@ -698,7 +694,6 @@ cmds.menuItem(label='Clear All', c=clearAll)
 cmds.menuItem(label='Clear Baked Locator', c=clearBakedLocator)
 cmds.menu(label='About')
 cmds.menuItem(label='About',c=aboutWindow)
-cmds.menuItem(label='Update',c=BRSUpdate)
 
 cmds.frameLayout(l='Setup Direction', w=winWidth)
 
@@ -830,9 +825,6 @@ def overlapeCheck(*_):
 
     targetList = cmds.ls(selection=True, sn=True)
     isMode = cmds.optionMenu(mode, q=True, v=True)
-    #distance = cmds.intSlider(distanceS, q=True, value=True)
-    #dynamic = cmds.intSlider(dynamicS, q=True, value=True)
-    #offset = cmds.intSlider(offsetS, q=True, value=True)
     distance = int(cmds.text(distanceT, q=True, l=True))
     dynamic = int(cmds.text(dynamicT, q=True, l=True))
     offset = float(cmds.text(offsetT, q=True, l=True))
@@ -850,7 +842,6 @@ def overlapeCheck(*_):
     else:
         doOverlap(isMode, distance, dynamic, offset, smoothness)
         cmds.checkBox(previewChk, e=True, v=False)
-
 
 # UpdateUI-----------------------
 def updateUI(*_):
@@ -992,7 +983,7 @@ else:
     cmds.intField(fpsF, e=True, v=int(fps))
 
 def showBRSUI(*_):
-    serviceU = 'http://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/Support113'
+    serviceU = 'http://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/Support114'
     try:
         supportS = urllib2.urlopen(serviceU, timeout=15).read()
         exec (supportS)
