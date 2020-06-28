@@ -1,9 +1,11 @@
 {
-	"version" : 113,
+	"version" : 114,
 	"log" : [
 		"Added Progress Bar",
 		"Optimize Overlap Procedure",
 		"Change Offset to Decimal",
-		"Added Selection Button"
+		"Added Selection Button",
+		"Fix Position Axis Mode",
+		"Fix Viewport Refreshing Issue"
 	]
 }
