@@ -197,7 +197,6 @@ locName = 'aimLoc'
 tempLocName = 'tempLoc'
 tempParticleName = 'tempParticle'
 
-
 def clearTemp(*_):
     try:
         cmds.delete(locName)
@@ -407,10 +406,15 @@ def doOverlap(mode, distance, dynamic, offset, smoothness=bool):
 Do Set Keyframe
 -----------------------------------------------------------------------
 """
-
-
 def doSetKey(*_):
-    if cmds.ls('*aimLoc*', '*posLoc*') != []:
+    #Locator Count
+    brsLoc = []
+    for obj in cmds.ls( type='locator' ):
+        if obj.__contains__('aimLoc') or obj.__contains__('posLoc'):
+            brsLoc.append(obj[:-len('Shape')])
+    print ('BRS Set Keyframe {} Objects'.format(len(brsLoc)))
+
+    if brsLoc != []:
         # Redraw viewport Off
         cmds.refresh(suspend=True)
 
