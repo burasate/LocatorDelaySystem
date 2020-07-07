@@ -608,7 +608,7 @@ def setAimX(*_):
     aimY = False
     aimZ = False
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -619,7 +619,7 @@ def setAimY(*_):
     aimY = True
     aimZ = False
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -630,7 +630,7 @@ def setAimZ(*_):
     aimY = False
     aimZ = True
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -639,7 +639,7 @@ def toggleInvert(*_):
     global aimInvert
     aimInvert = not aimInvert
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -650,7 +650,7 @@ def setPosXZ(*_):
     posY = False
     posXYZ = False
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -661,7 +661,7 @@ def setPosY(*_):
     posY = True
     posXYZ = False
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -672,7 +672,7 @@ def setPosXYZ(*_):
     posY = False
     posXYZ = True
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -823,7 +823,7 @@ cmds.setParent('..')
 # Simulation Check --------------
 def overlapeCheck(*_):
     try:
-        updateUI()
+        BRSUpdateUI()
     except:
         pass
 
@@ -848,7 +848,7 @@ def overlapeCheck(*_):
         cmds.checkBox(previewChk, e=True, v=False)
 
 # UpdateUI-----------------------
-def updateUI(*_):
+def BRSUpdateUI(*_):
     clearTemp()
     distance = cmds.intSlider(distanceS, q=True, value=True)
     dynamic = cmds.intSlider(dynamicS, q=True, value=True)
@@ -966,16 +966,16 @@ def updateUI(*_):
     global frameRate
     frameRate = cmds.intField(fpsF, q=True, v=True)
 
-cmds.checkBox(previewChk, e=True, cc=updateUI)
-cmds.checkBox(delLocChk, e=True, cc=updateUI)
-cmds.checkBox(breakdownChk, e=True, cc=updateUI)
-cmds.checkBox(bakeChk, e=True, cc=updateUI)
-cmds.intSlider(distanceS, e=True, cc=updateUI, dc=updateUI)
-cmds.intSlider(dynamicS, e=True, cc=updateUI, dc=updateUI)
-cmds.intSlider(offsetS, e=True, cc=updateUI, dc=updateUI)
-cmds.optionMenu(mode, e=True, cc=updateUI)
+cmds.checkBox(previewChk, e=True, cc=BRSUpdateUI)
+cmds.checkBox(delLocChk, e=True, cc=BRSUpdateUI)
+cmds.checkBox(breakdownChk, e=True, cc=BRSUpdateUI)
+cmds.checkBox(bakeChk, e=True, cc=BRSUpdateUI)
+cmds.intSlider(distanceS, e=True, cc=BRSUpdateUI, dc=BRSUpdateUI)
+cmds.intSlider(dynamicS, e=True, cc=BRSUpdateUI, dc=BRSUpdateUI)
+cmds.intSlider(offsetS, e=True, cc=BRSUpdateUI, dc=BRSUpdateUI)
+cmds.optionMenu(mode, e=True, cc=BRSUpdateUI)
 cmds.button(overlapB, e=True, c=overlapeCheck)
-updateUI()
+BRSUpdateUI()
 
 # Get Fps
 timeUnitSet = {'game': 15, 'film': 24, 'pal': 25, 'ntsc': 30, 'show': 48, 'palf': 50, 'ntscf': 60}
