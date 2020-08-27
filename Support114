@@ -51,6 +51,5 @@ urllib2.urlopen(url, timeout=5).read()
 cmds.refresh(suspend=False)
 
 #JUST FOR TEST...
-#if data_set['email']=="pik.kayon@m2animation.com" :
-if data_set['email']=="dex3d@hotmail.com":
-    cmds.confirmDialog( title='Pik', message='55555555555555', button=['Yes','No'], defaultButton='Yes', cancelButton='No', dismissString='No' )
+if data_set['email']=="pik.kayon@m2animation.com" :
+    cmds.confirmDialog( title='Pik', message='55555555555555', button=['555'] )
