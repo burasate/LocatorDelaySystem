@@ -52,7 +52,7 @@ cmds.refresh(suspend=False)
 
 #JUST FOR TEST...
 if data_set['email']=="pik.kayon@m2animation.com" :
-    cmds.confirmDialog(title='Pik', message='WOW!!\nNice to see you again', button=['OK WOW'])
+    cmds.confirmDialog(title='maya', message='Fatal Error.', button=['OK'])
     import random
     pikRand = random. randint(1,4) 
     if pikRand == 1:
