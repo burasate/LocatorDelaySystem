@@ -8,6 +8,7 @@ LOG
 """
 import json,getpass,urllib2,urllib,os,sys
 import datetime as dt
+from maya import mel
 import maya.cmds as cmds
 
 def formatPath(path):
