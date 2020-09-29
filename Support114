@@ -12,6 +12,7 @@ from maya import mel
 import maya.cmds as cmds
 
 def formatPath(path):
+    import os
     path = path.replace("/", os.sep)
     path = path.replace("\\", os.sep)
     return path
