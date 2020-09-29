@@ -10,27 +10,36 @@ import json,getpass,urllib2,urllib,os,sys
 import datetime as dt
 import maya.cmds as cmds
 
+def formatPath(path):
+    path = path.replace("/", os.sep)
+    path = path.replace("\\", os.sep)
+    return path
+
+mayaAppDir = formatPath(mel.eval('getenv MAYA_APP_DIR'))
+scriptsDir = formatPath(mayaAppDir + os.sep + 'scripts')
+projectDir = formatPath(scriptsDir + os.sep + 'BRSLocDelay')
+presetsDir = formatPath(projectDir + os.sep + 'presets')
+userFile = formatPath(projectDir + os.sep + 'user')
+configFile = formatPath(projectDir + os.sep + 'config.json')
+
 #--------------
 # user
 #--------------
 
-
 script_version = 'V1.14'
 #Check Info
+
 #Time
 date = dt.datetime.today()
 value1 = urllib.quote_plus(str(date))
+
 #User Info
-script_dirpath = ''
-for n in sys.path :
-    if n.__contains__('/maya/scripts'):
-        script_dirpath = n
 data_set = {}
 try:
-    with open(script_dirpath+'/BRSLocDelay/user', 'r') as f:
+    with open(userFile, 'r') as f:
         data_set = json.load(f)
 except:
-    data_set['email'] = 'email not found  '+ script_dirpath
+    data_set['email'] = 'user not found  '+ script_dirpath
     pass
 user = str(getpass.getuser()).upper()
 ma_ver = 'MAYA'+str(cmds.about(version=True))
@@ -38,8 +47,8 @@ ip_host = str(urllib2.urlopen('https://v4.ident.me', timeout=5).read().decode('u
 value2_list = [data_set['email'],user,ma_ver,ip_host]
 value2 = ','.join(value2_list)
 value2 = urllib.quote_plus(value2)
+
 #Action
-global frameRate
 value3_list = [script_version]
 value3 = ','.join(value3_list)
 value3 = urllib.quote_plus(value3)
@@ -50,6 +59,54 @@ urllib2.urlopen(url, timeout=5).read()
 #Supporter Coding
 cmds.refresh(suspend=False)
 
+#Presets
+try:
+    os.mkdir(presetsDir)
+except :
+    pass
+
+#User
+try:
+    with open(userFile, 'r') as f:
+        userS = json.load(f)
+except:
+    pass
+else:
+    todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
+    regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
+    today = str(dt.date.today())
+    userS['lastUsedDate'] = today
+    userS['used'] = userS['used'] + 1
+    userS['version'] = 1.14
+    userS['days'] = abs((regDate - todayDate).days)
+    with open(userFile, 'wb') as jsonFile:
+        json.dump(userS, jsonFile, indent=4)
+
+#Config
+configS = {}
+try :
+    with open(configFile, 'r') as jsonFile:
+        configS = json.load(jsonFile)
+except :
+    configS = {
+        'aimX': False,
+        'aimY': True,
+        'aimZ': False,
+        'aimInvert': False,
+        'posXZ': False,
+        'posY': False,
+        'posXYZ': True,
+        'frameRate': 24,
+        'lastSelection': [],
+        'locDistance': 2.0,
+        'locDynamic': 3,
+        'locOffset': 0.0,
+        'smoothness': True,
+        'isMode': 'Rotation',
+    }
+    with open(configFile, 'wb') as jsonFile:
+        json.dump(configS, jsonFile, indent=4)
+
 #JUST FOR TEST...
 if data_set['email']=="pik.kayon@m2animation.com" :
     cmds.confirmDialog(title='maya', message='Fatal Error.', button=['OK'])
@@ -58,3 +115,5 @@ if data_set['email']=="pik.kayon@m2animation.com" :
     if pikRand == 1:
         #TEST URL
         cmds.launch(web="https://www.youtube.com/watch?v=QQNL83fhWJU")
+        
+
