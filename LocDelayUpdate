@@ -47,7 +47,7 @@ else:
         mainWriter.writelines(urlReader)
         mainWriter.close()
         print('Updated')
-        cmds.confirmDialog(title='BRS LOCATOR DELAY UPDATE', message='Update Successful', button=['OK'])
+        #cmds.confirmDialog(title='BRS LOCATOR DELAY UPDATE', message='Update Successful', button=['OK'])
     except:
         mainWriter.writelines(mainReader)
         mainWriter.close()
@@ -150,3 +150,7 @@ for pycF in pycList:
 		os.remove(pycF)
 	except :
 		pass
+		
+# Finish
+cmds.inViewMessage(amg='BRS Delay : Update <hl>Successful</hl>', pos='botCenter', fade=True,
+                           fit=250, fst=2000, fot=250)
