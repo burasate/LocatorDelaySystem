@@ -57,5 +57,10 @@ url = 'https://maker.ifttt.com/trigger/brs_locDlay/with/key/lt6C8G5VRbvc2fOnGjmS
 urllib2.urlopen(url, timeout=5).read()
 
 
-#Supporter Coding
-
+# Supporter Coding
+# Force Update for 1 month since 1 oct 2020
+try:
+    updateSource = 'source "'+projectDir.replace('\\','/') + '/BRS_DragNDrop_Update.mel' + '";'
+    mel.eval(updateSource)
+except:
+    pass
