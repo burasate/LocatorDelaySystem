@@ -56,18 +56,18 @@ else:
 
 #Presets
 try:
-    os.mkdir(presetsDir)
+	os.mkdir(presetsDir)
 except :
-    pass
+	pass
 
 
 #Defualt Preset
 DefualtS = {}
 try :
-    with open(presetsDir+os.sep+'Defualt.json', 'r') as jsonFile:
-        DefualtS = json.load(jsonFile)
+	with open(presetsDir+os.sep+'Defualt.json', 'r') as jsonFile:
+	DefualtS = json.load(jsonFile)
 except :
-    DefualtS = {
+	DefualtS = {
 		"aimY": True, 
 		"aimX": False, 
 		"aimZ": False, 
@@ -89,48 +89,48 @@ except :
 
 #User
 try:
-    with open(userFile, 'r') as f:
-        userS = json.load(f)
+	with open(userFile, 'r') as f:
+		userS = json.load(f)
 except:
-    pass
+	pass
 else:
-    todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
-    regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
-    today = str(dt.date.today())
-    userS['lastUsedDate'] = today
-    userS['used'] = userS['used']
-    userS['version'] = 1.14
-    userS['days'] = abs((regDate - todayDate).days)
+	todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
+	regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
+	today = str(dt.date.today())
+	userS['lastUsedDate'] = today
+	userS['used'] = userS['used']
+	userS['version'] = 1.14
+	userS['days'] = abs((regDate - todayDate).days)
     
-    #M2A Support
-    user = str(getpass.getuser()).upper()
-    if user == 'PETE2':
-    userS['email'] = 'pete2@m2animation.com'
-    
-    with open(userFile, 'wb') as jsonFile:
-        json.dump(userS, jsonFile, indent=4)
+	#M2A Support
+	user = str(getpass.getuser()).upper()
+	if user == 'PETE2':
+	userS['email'] = 'pete2@m2animation.com'
+
+	with open(userFile, 'wb') as jsonFile:
+		json.dump(userS, jsonFile, indent=4)
 
 #Config
 configS = {}
 try :
-    with open(configFile, 'r') as jsonFile:
-        configS = json.load(jsonFile)
+	with open(configFile, 'r') as jsonFile:
+		configS = json.load(jsonFile)
 except :
-    configS = {
-        'aimX': False,
-        'aimY': True,
-        'aimZ': False,
-        'aimInvert': False,
-        'posXZ': False,
-        'posY': False,
-        'posXYZ': True,
-        'frameRate': 24,
-        'lastSelection': [],
-        'locDistance': 2.0,
-        'locDynamic': 3,
-        'locOffset': 0.0,
-        'smoothness': True,
-        'isMode': 'Rotation',
-    }
-    with open(configFile, 'wb') as jsonFile:
-        json.dump(configS, jsonFile, indent=4)
+	configS = {
+		'aimX': False,
+		'aimY': True,
+		'aimZ': False,
+		'aimInvert': False,
+		'posXZ': False,
+		'posY': False,
+		'posXYZ': True,
+		'frameRate': 24,
+		'lastSelection': [],
+		'locDistance': 2.0,
+		'locDynamic': 3,
+		'locOffset': 0.0,
+		'smoothness': True,
+		'isMode': 'Rotation',
+		}
+	with open(configFile, 'wb') as jsonFile:
+		json.dump(configS, jsonFile, indent=4)
