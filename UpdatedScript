@@ -132,6 +132,9 @@ def progressEnd (*_):
     cmds.progressBar(BRSProgressControl, edit=True, progress=0,visible=False)
     cmds.waitCursor(state=False)
 
+def BRSUpdateVersion(*_):
+    mel.eval('"source '+ projectDir + os.sep + 'BRS_DragNDrop_Update.mel;"')
+
 """
 -----------------------------------------------------------------------
 Preset
@@ -906,6 +909,7 @@ cmds.menuItem(label='Clear All', c=clearAll)
 cmds.menuItem(label='Clear Baked Locator', c=clearBakedLocator)
 cmds.menu(label='About')
 cmds.menuItem(label='About',c=aboutWindow)
+cmds.menuItem(label='Update Version',c=BRSUpdateVersion)
 
 cmds.frameLayout(l='Presets', w=winWidth)
 
