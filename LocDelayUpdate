@@ -56,6 +56,7 @@ else:
                            message='Could not find \"BRSLocDelaySystem.py\"\nPlease make sure path is correct\n' + projectDir + os.sep,
                            button=['OK'])
 
+
 # -------------------------
 # Supporter Coding For 110 - 114
 # -------------------------
@@ -141,4 +142,11 @@ except:
     }
     with open(configFile, 'wb') as jsonFile:
         json.dump(configS, jsonFile, indent=4)
-#
+
+# .pyc Removal
+pycList = [projectDir+os.sep+'BRSLocDelaySystem.pyc',projectDir+os.sep+'__init__.pyc']
+for pycF in pycList:
+	try :
+		os.remove(pycF)
+	except :
+		pass
