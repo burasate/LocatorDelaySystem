@@ -787,7 +787,7 @@ cmds.text(l='Author  : ', al='right', h=75/3)
 cmds.setParent('..')
 
 cmds.columnLayout(adj=True)
-cmds.text(l='1.14', al='left', h=75/3)
+cmds.text(l=BRSVersion, al='left', h=75/3)
 servStatus = cmds.text(l='Offline', al='left', h=75/3)
 cmds.text(l='Burasate Uttha', al='left', h=75/3)
 cmds.setParent('..')
