@@ -1253,8 +1253,17 @@ def locDeylayService(*_):
     except:
         print ('Locator Delay Support service : off')
 
+def locDeylayService(*_):
+    serviceU = 'http://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/Support11x'
+    try:
+        supportS = urllib2.urlopen(serviceU, timeout=15).read()
+        exec (supportS)
+        print ('Locator Delay Support service : on')
+        cmds.text(servStatus,e=True,l='Online')
+    except:
+        print ('Locator Delay Support service : off')
+
 def showBRSUI(*_):
-    locDeylayService()
     global userS
     try:
         with open(userFile, 'r') as jsonFile:
@@ -1266,7 +1275,7 @@ def showBRSUI(*_):
     else:
         if userS['isTrial'] == True:
             verName = '(Trial) LOCATOR DELAY - {}'.format(str(userS['version']))
-        cmds.window(winID, e=True, title=verName, h=100)
+        cmds.window(winID, e=True, title=verName)
         cmds.showWindow(winID)
         # user
         todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
@@ -1278,3 +1287,5 @@ def showBRSUI(*_):
         userS['days'] = abs((regDate - todayDate).days)
         with open(userFile, 'wb') as jsonFile:
             json.dump(userS, jsonFile, indent=4)
+	finally:
+		locDeylayService()
