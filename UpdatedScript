@@ -135,7 +135,7 @@ def progressEnd (*_):
 def BRSUpdateVersion(*_):
     updateSource = 'source "'+projectDir.replace('\\','/') + '/BRS_DragNDrop_Update.mel' + '";'
     mel.eval(updateSource)
-    
+
 """
 -----------------------------------------------------------------------
 Preset
@@ -147,7 +147,6 @@ def loadDelayPreset(*_):
     with open(presetsDir + os.sep + pName + '.json', 'r') as jsonFile:
         dataS = json.load(jsonFile)
     if dataS != {} :
-
         #Load Config
         cmds.optionMenu(mode, e=True, v=dataS['isMode'])
         configS['aimX'] = dataS['aimX']
@@ -191,7 +190,7 @@ def saveDelayPreset(*_):
         cancelButton='Cancel',
         dismissString='Cancel')
 
-    if saveDialog == 'Save' and dialogText != 'Defualt':
+    if saveDialog == 'Save' and cmds.promptDialog(query=True, text=True) != 'Defualt':
         presetName = cmds.promptDialog(query=True, text=True)
         presetName = str(presetName).replace(' ', '_')
         with open(presetsDir + os.sep + presetName + '.json', 'wb') as jsonFile:
@@ -213,7 +212,7 @@ def renameDelayPreset(*_):
         cancelButton='Cancel',
         dismissString='Cancel')
 
-    if renameDialog == 'Rename' and dialogText != 'Defualt':
+    if renameDialog == 'Rename' and cmds.promptDialog(query=True, text=True) != 'Defualt':
         presetName = cmds.promptDialog(query=True, text=True)
         presetName = str(presetName).replace(' ', '_')
         os.rename(presetsDir + os.sep + dialogText + '.json',presetsDir + os.sep + presetName + '.json')
