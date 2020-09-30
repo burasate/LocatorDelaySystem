@@ -94,14 +94,17 @@ except:
 # User
 try:
     with open(userFile, 'r') as f:
-        userS = json.load(f)
+        userS = json.load(f)       
 except:
     pass
 else:
     today = str(dt.date.today())
     userS['lastUsedDate'] = today
     todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
-    regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
+    try:
+        regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
+    except:
+		regDate = dt.datetime.strptime(userS['registerDate'], today)
     userS['used'] = userS['used']
     userS['version'] = 1.14
     userS['days'] = abs((regDate - todayDate).days)
