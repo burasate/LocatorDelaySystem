@@ -493,6 +493,8 @@ def doOverlap(mode, distance, dynamic, offset, smoothness=bool):
                 cmds.keyframe(tempLocName,e=True, iub=True, r=True, o='over', tc=offset,at=['translateY'])
             elif configS['posXYZ'] == True:
                 cmds.keyframe(tempLocName,e=True, iub=True, r=True, o='over', tc=offset)
+        else:
+            cmds.keyframe(tempLocName, e=True, iub=True, r=True, o='over', tc=offset)
 
         # Delete Temp
         cmds.delete(tempParticleName)
@@ -1173,6 +1175,7 @@ def BRSPresetUIUpdate(*_):
         cmds.optionMenu(presetMenu, e=True, v='Defualt')
 
 def BRSUpdateUI(*_):
+    print (configS)
     clearTemp()
     #Field Update
     cmds.floatField(distanceT, e=True, v=configS['locDistance'])
