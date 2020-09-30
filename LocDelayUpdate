@@ -68,19 +68,19 @@ try :
         DefualtS = json.load(jsonFile)
 except :
     DefualtS = {
-    	"aimY": true, 
-	"aimX": false, 
-	"aimZ": false, 
-	"posXZ": false, 
+    	"aimY": True, 
+	"aimX": False, 
+	"aimZ": False, 
+	"posXZ": False, 
 	"lastSelection": [], 
 	"frameRate": 24, 
-	"aimInvert": false, 
-	"posXYZ": true, 
+	"aimInvert": False, 
+	"posXYZ": True, 
 	"locOffset": 0.0, 
-	"posY": false, 
+	"posY": False, 
 	"locDistance": 2.0, 
 	"locDynamic": 3, 
-	"smoothness": true, 
+	"smoothness": True, 
 	"isMode": "Rotation"
     }
     with open(presetsDir+os.sep+'Defualt.json', 'wb') as jsonFile:
