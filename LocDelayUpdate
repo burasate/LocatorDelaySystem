@@ -8,7 +8,6 @@ import datetime as dt
 
 
 def formatPath(path):
-    import os
     path = path.replace("/", os.sep)
     path = path.replace("\\", os.sep)
     return path
