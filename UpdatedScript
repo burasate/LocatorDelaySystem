@@ -135,8 +135,7 @@ def progressEnd (*_):
 def BRSUpdateVersion(*_):
     updateSource = 'source "'+projectDir.replace('\\','/') + '/BRS_DragNDrop_Update.mel' + '";'
     mel.eval(updateSource)
-    #mel.eval('source " '+ projectDir + os.sep + 'BRS_DragNDrop_Update.mel;\"')
-    #mel.eval('source "D:/GoogleDrive/Documents/2020/BRS_LOC_DELAY_SYSTEM/publish/BRSLocDelay/BRS_DragNDrop_Update.mel";')
+    
 """
 -----------------------------------------------------------------------
 Preset
