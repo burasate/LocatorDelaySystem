@@ -1287,5 +1287,5 @@ def showBRSUI(*_):
         userS['days'] = abs((regDate - todayDate).days)
         with open(userFile, 'wb') as jsonFile:
             json.dump(userS, jsonFile, indent=4)
-	finally:
-		locDeylayService()
+    finally:
+        locDeylayService()
