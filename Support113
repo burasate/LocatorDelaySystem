@@ -8,7 +8,21 @@ LOG
 """
 import json,getpass,urllib2,urllib,os,sys
 import datetime as dt
+from maya import mel
 import maya.cmds as cmds
+
+def formatPath(path):
+    import os
+    path = path.replace("/", os.sep)
+    path = path.replace("\\", os.sep)
+    return path
+
+mayaAppDir = formatPath(mel.eval('getenv MAYA_APP_DIR'))
+scriptsDir = formatPath(mayaAppDir + os.sep + 'scripts')
+projectDir = formatPath(scriptsDir + os.sep + 'BRSLocDelay')
+presetsDir = formatPath(projectDir + os.sep + 'presets')
+userFile = formatPath(projectDir + os.sep + 'user')
+configFile = formatPath(projectDir + os.sep + 'config.json')
 
 #--------------
 # user
@@ -72,3 +86,50 @@ if updateConfirm == 'Update':
         print ('Updating Failed')
         pass
 """
+#Presets
+try:
+    os.mkdir(presetsDir)
+except :
+    pass
+
+#User
+try:
+    with open(userFile, 'r') as f:
+        userS = json.load(f)
+except:
+    pass
+else:
+    todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
+    regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
+    today = str(dt.date.today())
+    userS['lastUsedDate'] = today
+    userS['used'] = userS['used'] + 1
+    userS['version'] = 1.14
+    userS['days'] = abs((regDate - todayDate).days)
+    with open(userFile, 'wb') as jsonFile:
+        json.dump(userS, jsonFile, indent=4)
+
+#Config
+configS = {}
+try :
+    with open(configFile, 'r') as jsonFile:
+        configS = json.load(jsonFile)
+except :
+    configS = {
+        'aimX': False,
+        'aimY': True,
+        'aimZ': False,
+        'aimInvert': False,
+        'posXZ': False,
+        'posY': False,
+        'posXYZ': True,
+        'frameRate': 24,
+        'lastSelection': [],
+        'locDistance': 2.0,
+        'locDynamic': 3,
+        'locOffset': 0.0,
+        'smoothness': True,
+        'isMode': 'Rotation',
+    }
+    with open(configFile, 'wb') as jsonFile:
+        json.dump(configS, jsonFile, indent=4)
