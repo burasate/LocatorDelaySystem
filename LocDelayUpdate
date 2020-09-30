@@ -3,7 +3,7 @@ LOCATOR DELAY SYSTEM UPDATER
 """
 from maya import cmds
 from maya import mel
-import os,json,urllib2
+import os,json,urllib2,getpass
 import datetime as dt
 
 def formatPath(path):
@@ -98,9 +98,15 @@ else:
     regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
     today = str(dt.date.today())
     userS['lastUsedDate'] = today
-    userS['used'] = userS['used'] + 1
+    userS['used'] = userS['used']
     userS['version'] = 1.14
     userS['days'] = abs((regDate - todayDate).days)
+    
+    #M2A Support
+    user = str(getpass.getuser()).upper()
+    if user == 'PETE2':
+    userS['email'] = 'pete2@m2animation.com'
+    
     with open(userFile, 'wb') as jsonFile:
         json.dump(userS, jsonFile, indent=4)
 
