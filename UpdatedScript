@@ -133,7 +133,7 @@ def progressEnd (*_):
     cmds.waitCursor(state=False)
 
 def BRSUpdateVersion(*_):
-    mel.eval('"source '+ projectDir + os.sep + 'BRS_DragNDrop_Update.mel;"')
+    mel.eval('\"source '+ projectDir + os.sep + 'BRS_DragNDrop_Update.mel;\"')
 
 """
 -----------------------------------------------------------------------
