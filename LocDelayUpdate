@@ -99,10 +99,10 @@ try:
 except:
     pass
 else:
-    todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
-    regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
     today = str(dt.date.today())
     userS['lastUsedDate'] = today
+    todayDate = dt.datetime.strptime(userS['lastUsedDate'], '%Y-%m-%d')
+    regDate = dt.datetime.strptime(userS['registerDate'], '%Y-%m-%d')
     userS['used'] = userS['used']
     userS['version'] = 1.14
     userS['days'] = abs((regDate - todayDate).days)
