@@ -200,27 +200,30 @@ def saveDelayPreset(*_):
         BRSUpdateUI()
         BRSPresetUIUpdate()
         cmds.optionMenu(presetMenu, e=True, v=presetName)
+    BRSPresetUIUpdate()
 
 def renameDelayPreset(*_):
     dialogText = cmds.optionMenu(presetMenu, q=True, v=True)
-    renameDialog = cmds.promptDialog(
-        title='Save Preset',
-        message='Preset Name',
-        text=dialogText,
-        button=['Rename', 'Cancel'],
-        defaultButton='Rename',
-        cancelButton='Cancel',
-        dismissString='Cancel')
+    if dialogText != 'Defualt':
+        renameDialog = cmds.promptDialog(
+            title='Save Preset',
+            message='Preset Name',
+            text=dialogText,
+            button=['Rename', 'Cancel'],
+            defaultButton='Rename',
+            cancelButton='Cancel',
+            dismissString='Cancel')
 
-    if renameDialog == 'Rename' and cmds.promptDialog(query=True, text=True) != 'Defualt':
-        presetName = cmds.promptDialog(query=True, text=True)
-        presetName = str(presetName).replace(' ', '_')
-        os.rename(presetsDir + os.sep + dialogText + '.json',presetsDir + os.sep + presetName + '.json')
-        cmds.inViewMessage(amg='BRS Delay : Rename  <hl>{}</hl>  Preset'.format(presetName), pos='botCenter', fade=True,
-                           fit=250, fst=1000, fot=250)
-        BRSUpdateUI()
-        BRSPresetUIUpdate()
-        cmds.optionMenu(presetMenu, e=True, v=presetName)
+        if renameDialog == 'Rename' and cmds.promptDialog(query=True, text=True) != 'Defualt':
+            presetName = cmds.promptDialog(query=True, text=True)
+            presetName = str(presetName).replace(' ', '_')
+            os.rename(presetsDir + os.sep + dialogText + '.json',presetsDir + os.sep + presetName + '.json')
+            cmds.inViewMessage(amg='BRS Delay : Rename  <hl>{}</hl>  Preset'.format(presetName), pos='botCenter', fade=True,
+                               fit=250, fst=1000, fot=250)
+            BRSUpdateUI()
+            BRSPresetUIUpdate()
+            cmds.optionMenu(presetMenu, e=True, v=presetName)
+    BRSPresetUIUpdate()
 
 def deleteDelayPreset(*_):
     dialogText = cmds.optionMenu(presetMenu, q=True, v=True)
@@ -238,6 +241,7 @@ def deleteDelayPreset(*_):
             print ('Delete {}'.format(dialogText))
         BRSUpdateUI()
         BRSPresetUIUpdate()
+    BRSPresetUIUpdate()
 
 
 """
