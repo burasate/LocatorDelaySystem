@@ -1185,7 +1185,7 @@ def BRSPresetUIUpdate(*_):
         cmds.optionMenu(presetMenu, e=True, v='Defualt')
 
 def BRSUpdateUI(*_):
-    print (configS)
+    #print (configS)
     clearTemp()
     #Field Update
     cmds.floatField(distanceT, e=True, v=configS['locDistance'])
