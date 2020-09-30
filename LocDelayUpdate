@@ -7,9 +7,9 @@ import os,json,urllib2,getpass
 import datetime as dt
 
 def formatPath(path):
-    path = path.replace("/", os.sep)
-    path = path.replace("\\", os.sep)
-    return path
+	path = path.replace("/", os.sep)
+	path = path.replace("\\", os.sep)
+	return path
 
 mayaAppDir = formatPath(mel.eval('getenv MAYA_APP_DIR'))
 scriptsDir = formatPath(mayaAppDir + os.sep + 'scripts')
@@ -68,23 +68,23 @@ try :
         DefualtS = json.load(jsonFile)
 except :
     DefualtS = {
-    	"aimY": True, 
-	"aimX": False, 
-	"aimZ": False, 
-	"posXZ": False, 
-	"lastSelection": [], 
-	"frameRate": 24, 
-	"aimInvert": False, 
-	"posXYZ": True, 
-	"locOffset": 0.0, 
-	"posY": False, 
-	"locDistance": 2.0, 
-	"locDynamic": 3, 
-	"smoothness": True, 
-	"isMode": "Rotation"
-    }
-    with open(presetsDir+os.sep+'Defualt.json', 'wb') as jsonFile:
-        json.dump(DefualtS, jsonFile, indent=4)
+		"aimY": True, 
+		"aimX": False, 
+		"aimZ": False, 
+		"posXZ": False, 
+		"lastSelection": [], 
+		"frameRate": 24, 
+		"aimInvert": False, 
+		"posXYZ": True, 
+		"locOffset": 0.0, 
+		"posY": False, 
+		"locDistance": 2.0, 
+		"locDynamic": 3, 
+		"smoothness": True, 
+		"isMode": "Rotation"
+		}
+	with open(presetsDir+os.sep+'Defualt.json', 'wb') as jsonFile:
+		json.dump(DefualtS, jsonFile, indent=4)
 
 
 #User
