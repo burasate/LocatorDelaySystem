@@ -187,7 +187,7 @@ def saveDelayPreset(*_):
         cancelButton='Cancel',
         dismissString='Cancel')
 
-    if saveDialog == 'Save':
+    if saveDialog == 'Save' and dialogText != 'Defualt':
         presetName = cmds.promptDialog(query=True, text=True)
         presetName = str(presetName).replace(' ', '_')
         with open(presetsDir + os.sep + presetName + '.json', 'wb') as jsonFile:
@@ -675,22 +675,28 @@ def doSetKey(*_):
             tcurFrame = round(cmds.currentTime(q=True), 0)
             tnextFrame = round(cmds.findKeyframe(timeSlider=True, which='next'), 0)
             progressStep(3)
-            if (tnextFrame - tcurFrame) < btween:  # Set Key
-                #print ('set key')
-                if tnextFrame in keyframeSortNew:
-                    cmds.currentTime(tnextFrame)
-                    cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none',
-                                     controlPoints=0,
-                                     at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
-                else:
-                    cmds.currentTime(tnextFrame)
+            if btwnInt != 0:
+                if (tnextFrame - tcurFrame) < btween:  # Set Key
+                    # print ('set key')
+                    if tnextFrame in keyframeSortNew:
+                        cmds.currentTime(tnextFrame)
+                        cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none',
+                                         controlPoints=0,
+                                         at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+                    else:
+                        cmds.currentTime(tnextFrame)
+                        cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=1, hierarchy='none',
+                                         controlPoints=0,
+                                         at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
+                else:  # Insert BreakDown Key
+                    # print ('set bd')
+                    cmds.currentTime(tcurFrame + btween)
                     cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=1, hierarchy='none',
                                      controlPoints=0,
                                      at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
-            else:  # Insert BreakDown Key
-                #print ('set bd')
-                cmds.currentTime(tcurFrame + btween)
-                cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=1, hierarchy='none',
+            else:
+                cmds.currentTime(tnextFrame)
+                cmds.setKeyframe(selectionList, itt='auto', ott='auto', breakdown=0, hierarchy='none',
                                  controlPoints=0,
                                  at=('tx', 'ty', 'tz', 'rx', 'ry', 'rz'))
 
@@ -708,7 +714,7 @@ def doSetKey(*_):
             cmds.delete(locatorList)
 
         # Convert to Key
-        cmds.keyframe(selectionList, e=True,breakdown=False)
+        #cmds.keyframe(selectionList, e=True,breakdown=False)
 
         # Finish
         cmds.select(selectionList, r=True)
