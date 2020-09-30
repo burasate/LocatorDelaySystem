@@ -212,7 +212,7 @@ def renameDelayPreset(*_):
         cancelButton='Cancel',
         dismissString='Cancel')
 
-    if renameDialog == 'Rename':
+    if renameDialog == 'Rename' and dialogText != 'Defualt':
         presetName = cmds.promptDialog(query=True, text=True)
         presetName = str(presetName).replace(' ', '_')
         os.rename(presetsDir + os.sep + dialogText + '.json',presetsDir + os.sep + presetName + '.json')
