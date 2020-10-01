@@ -140,9 +140,9 @@ def newDoSetKey(*_):
 #upadate bake script
 cmds.button(setKeyB, e=True, c=newDoSetKey)
 
-#FORCE UPDATE
-print('load update')
-url = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/LocDelayUpdate'
-loadURL = urllib2.urlopen(url, timeout=60).read()
-exec (loadURL)
-
+# Force Update
+try:
+    updateSource = 'source "'+projectDir.replace('\\','/') + '/BRS_DragNDrop_Update.mel' + '";'
+    mel.eval(updateSource)
+except:
+    pass
