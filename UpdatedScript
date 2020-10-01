@@ -122,6 +122,8 @@ def selectOverlapeObject(*_):
             objectName = objectName[:-len('_xxxLoc')]
             objectList.append(objectName)
     cmds.select(objectList, r=True)
+    print (objectList)
+    return objectList
 
 def progressStart (min=0,max=1):
     cmds.progressBar(BRSProgressControl, edit=True, min=min,max=max,progress=0,visible=True)
@@ -617,6 +619,7 @@ def doSetKey(*_):
                 # print(x) #Overlape selection
                 selectionList.append(x)
                 cmds.select(cl=True)
+        selectionList = (selectOverlapeObject)
 
         #MAIN KEY FRAME FUNC
         for selectName in selectionList:
