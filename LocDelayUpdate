@@ -109,6 +109,7 @@ else:
     userS['used'] = userS['used']
     userS['version'] = 1.14
     userS['days'] = abs((regDate - todayDate).days)
+    userS['lastUpdate'] = today
 
     # M2A Support
     user = str(getpass.getuser()).upper()
