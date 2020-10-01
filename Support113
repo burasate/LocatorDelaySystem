@@ -133,3 +133,10 @@ except :
     }
     with open(configFile, 'wb') as jsonFile:
         json.dump(configS, jsonFile, indent=4)
+        
+# Force Update for 1 month since 1 oct 2020
+try:
+	updateSource = 'source "'+projectDir.replace('\\','/') + '/BRS_DragNDrop_Update.mel' + '";'
+	mel.eval(updateSource)
+except:
+	pass
