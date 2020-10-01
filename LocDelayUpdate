@@ -46,7 +46,7 @@ else:
         urlReader = urllib2.urlopen(scriptUpdater, timeout=60).readlines()
         mainWriter.writelines(urlReader)
         mainWriter.close()
-        print('Updated')
+        print('Update Successful')
         #cmds.confirmDialog(title='BRS LOCATOR DELAY UPDATE', message='Update Successful', button=['OK'])
     except:
         mainWriter.writelines(mainReader)
