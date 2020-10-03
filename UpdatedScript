@@ -933,7 +933,7 @@ cmds.setParent('..')
 cmds.rowLayout(h=20, numberOfColumns=4, columnWidth4=(70, 50, 150, 10), adjustableColumn=3, columnAlign=(1, 'right'),
                columnAttach=[(1, 'both', 0), (2, 'both', 0), (3, 'both', 0)])
 cmds.text(l='Distance  ', al='right')
-distanceT = cmds.floatField(editable=True,value=0,pre=1)
+distanceT = cmds.floatField(editable=True,value=0,pre=1,min=0,max=500)
 distanceS = cmds.floatSlider(minValue=1, maxValue=50, value=2)
 cmds.button(l=' ? ',annotation='Distance from selecion to locator')
 cmds.setParent('..')
@@ -977,8 +977,8 @@ cmds.setParent('..')
 cmds.rowLayout(h=20, numberOfColumns=4, columnWidth4=(70, 50, 150, 10), adjustableColumn=3, columnAlign=(1, 'right'),
                columnAttach=[(1, 'both', 0), (2, 'both', 0), (3, 'both', 0)])
 cmds.text(l='Offset  ', al='right')
-offsetT = cmds.floatField(editable=True,value=0,pre=1)
-offsetS = cmds.floatSlider(minValue=-3, maxValue=3, value=0)
+offsetT = cmds.floatField(editable=True,value=0,pre=1,min=-10,max=10)
+offsetS = cmds.floatSlider(minValue=-5, maxValue=5, value=0)
 cmds.button(l=' ? ',annotation='Frame offset to delay animation')
 cmds.setParent('..')
 
@@ -1001,7 +1001,7 @@ cmds.frameLayout(l='Bake Animation', w=winWidth)
 
 cmds.rowLayout(h=20, numberOfColumns=4, columnWidth4=(70, 50, 150, 10), adjustableColumn=3, columnAlign=(1, 'right'),
                columnAttach=[(1, 'both', 0), (2, 'both', 0), (3, 'both', 0)])
-cmds.text(l='Every  ', al='right')
+cmds.text(l='Breakdown Every  ', al='right')
 breakdownN = cmds.intField(editable=True, value=3)
 cmds.text(l='  Frame', al='left')
 delLocChk = cmds.checkBox(l='Delete Locator', value=True, al='center')
