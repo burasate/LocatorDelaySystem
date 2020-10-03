@@ -159,6 +159,8 @@ def loadDelayPreset(*_):
         configS['locDistance'] = dataS['locDistance']
         configS['locDynamic'] = dataS['locDynamic']
         configS['locOffset'] = dataS['locOffset']
+        configS['smoothness'] = dataS['smoothness']
+        cmds.checkBox(smoothnessChk,e=True, value=configS['smoothness'])
         BRSModeUpdate()
         BRSUpdateUI()
         cmds.inViewMessage(amg='BRS Delay : Loaded  <hl>{}</hl>  Preset'.format(pName), pos='botCenter', fade=True,
