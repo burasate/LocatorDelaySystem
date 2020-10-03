@@ -284,6 +284,8 @@ def createGuide(mode, distance=int):
     selectList = cmds.ls(selection=True)
     if selectList != []:
         for target in selectList:
+            # Redraw viewport Off
+            cmds.refresh(suspend=True)
             # New name
             newGuideName = target + '_' + guideName
             if mode == 'Rotation':
@@ -341,6 +343,8 @@ def createGuide(mode, distance=int):
 
             # Finish
             cmds.select(selectList)
+            # Redraw viewport On
+            cmds.refresh(suspend=False)
     else:
         clearGuide()
         cmds.warning('Select at least one object for Preview Mode.')
