@@ -321,22 +321,22 @@ def createGuide(mode, distance=int):
             if mode == 'Rotation':
                 if configS['aimX'] == True and configS['aimInvert'] == False:  # +X
                     cmds.rotate(0, 0, -90, newGuideName, r=True, os=True, fo=True)
-                    cmds.setAttr(newGuideName + '.overrideColorRGB', colorSet['red'])
+                    cmds.setAttr(newGuideName + '.overrideColorRGB', 1.0, 0.0, 0.0)
                 if configS['aimX'] == True and configS['aimInvert'] == True:  # -X
                     cmds.rotate(0, 0, 90, newGuideName, r=True, os=True, fo=True)
-                    cmds.setAttr(newGuideName + '.overrideColorRGB', colorSet['red'])
+                    cmds.setAttr(newGuideName + '.overrideColorRGB', 1.0, 0.0, 0.0)
                 if configS['aimY'] == True and configS['aimInvert'] == False:  # +Y
-                    cmds.setAttr(newGuideName + '.overrideColorRGB', colorSet['green'])
+                    cmds.setAttr(newGuideName + '.overrideColorRGB', 0.0, 1.1, 0.0)
                     pass  # Is Already Y
                 if configS['aimY'] == True and configS['aimInvert'] == True:  # -Y
                     cmds.rotate(0, 0, 180, newGuideName, r=True, os=True, fo=True)
-                    cmds.setAttr(newGuideName + '.overrideColorRGB', colorSet['green'])
+                    cmds.setAttr(newGuideName + '.overrideColorRGB', 0.0, 1.0, 0.0)
                 if configS['aimZ'] == True and configS['aimInvert'] == False:  # +Z
                     cmds.rotate(90, 0, 0, newGuideName, r=True, os=True, fo=True)
-                    cmds.setAttr(newGuideName + '.overrideColorRGB', colorSet['blue'])
+                    cmds.setAttr(newGuideName + '.overrideColorRGB', 0.0, 0.0, 1.0)
                 if configS['aimZ'] == True and configS['aimInvert'] == True:  # -Z
                     cmds.rotate(-90, 0, 0, newGuideName, r=True, os=True, fo=True)
-                    cmds.setAttr(newGuideName + '.overrideColorRGB', colorSet['blue'])
+                    cmds.setAttr(newGuideName + '.overrideColorRGB', 0.0, 0.0, 1.0)
                 cmds.move(0, distance, 0, newGuideName, r=True, os=True, wd=True)
             # Constraint
             parentConstraint(newGuideName, target)
