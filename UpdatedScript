@@ -997,11 +997,11 @@ cmds.columnLayout(h=20,bgc=colorSet['shadow']) #Progress
 BRSProgressControl = cmds.progressBar(h=20,minValue=0,maxValue=1,progress=0, width=winWidth-5,vis=False)
 cmds.setParent('..')  # columnLayout
 
-cmds.frameLayout(l='Bake Animation', w=winWidth)
+cmds.frameLayout(l='Keyframe / Breakdown', w=winWidth)
 
 cmds.rowLayout(h=20, numberOfColumns=4, columnWidth4=(70, 50, 150, 10), adjustableColumn=3, columnAlign=(1, 'right'),
                columnAttach=[(1, 'both', 0), (2, 'both', 0), (3, 'both', 0)])
-cmds.text(l='Breakdown Every  ', al='right')
+cmds.text(l='Breakdown  ', al='right')
 breakdownN = cmds.intField(editable=True, value=3)
 cmds.text(l='  Frame', al='left')
 delLocChk = cmds.checkBox(l='Delete Locator', value=True, al='center')
