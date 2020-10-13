@@ -60,6 +60,7 @@ except:
     dataSet['isTrial'] = True
     dataSet['registerDate'] = today
     dataSet['lastUsedDate'] = today
+    dataSet['lastUpdate'] = today
     dataSet['days'] = 0
     dataSet['used'] = 0
     dataSet['version'] = 0
