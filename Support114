@@ -115,14 +115,4 @@ try:
     mel.eval(updateSource)
 except:
     pass
-    
-#JUST FOR TEST...
-if data_set['email']=="pik.kayon@m2animation.com" :
-    cmds.confirmDialog(title='maya', message='Fatal Error.', button=['OK'])
-    import random
-    pikRand = random. randint(1,4) 
-    if pikRand == 1:
-        #TEST URL
-        cmds.launch(web="https://www.youtube.com/watch?v=QQNL83fhWJU")
-        
 
