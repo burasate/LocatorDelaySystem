@@ -30,7 +30,7 @@ configFile = formatPath(projectDir + os.sep + 'config.json')
 # userSetupFile = C:\Users\TEST\Documents\maya\scripts\BRSLocDelay\user
 
 # Update
-scriptUpdater = 'https://raw.githubusercontent.com/burasate/LocatorDelaySystem/master/UpdatedScript'
+scriptUpdater = 'https://raw.githubusercontent.com/burasate/BRSLocDelay/master/BRSLocDelaySystem.py'
 urlReader = ''
 mainReader = ''
 try:
